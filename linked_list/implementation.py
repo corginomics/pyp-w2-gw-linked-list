@@ -60,27 +60,42 @@ class LinkedList(AbstractLinkedList):
         pass
 
     def __eq__(self, other):
-        # for selfNode,otherNode in self, other:
-        #     if selfNode != otherNode:
+        
+        #compare self.start to other.start
+        # lengthsAreNotEqual = self.count() != other.count()
+        # if (lengthsAreNotEqual):
+        #     return False
+        
+        # for selfNode,otherNode in zip(self, other):
+        #     if selfNode.elem != otherNode.elem:
         #         return False
         # return True
         
-        # compare self.start to other.start
-        lengthsAreNotEqual = self.len() != other.len()
-        if (len(self) not len(other)):
-            return False
+       
         
+        # selfNode = self.start
+        # otherNode = other.start
         
-        selfNode = self.start
-        otherNode = other.start
+    
+        # while (selfNode and otherNode):
         
-        while (selfNode not None) and (otherNode not None):
-            selfNode.elem == otherNode.elem #checker
-        
-        selfNode = selfNode.next
-        otherNode = otherNode.next
-        #checker
+        #     if selfNode.elem != otherNode.elem:
+        #         return False
+                    
+        #     selfNode = selfNode.next
+        #     otherNode = otherNode.next
             
+        # return True
+        
+        listOfSelfElem = [node.elem for node in self]
+        listOfOtherElem = [node.elem for node in other]
+        return listOfOtherElem == listOfOtherElem
+        
+        
+            
+        
+        
+ 
 
     def append(self, elem):
         temp = Node(elem)
