@@ -183,3 +183,18 @@ class LinkedListTestCase(unittest.TestCase):
         my_list += LinkedList()
         self.assertEqual(my_list.count(), 0)
         self.assertEqual(my_list, LinkedList())
+
+    # This is a new test for __getitem__(self, index)
+    def test_getitem(self):
+        my_list = LinkedList([1])
+        self.assertEqual(my_list[0], 1)
+        
+    def test_getitem_empty_list(self):
+        with self.assertRaises(IndexError):
+            my_list = LinkedList()
+            my_list[0]
+        
+    def test_getitem_wrong_keytype(self):
+        with self.assertRaises(TypeError):
+            my_list = LinkedList([1])
+            my_list['q']

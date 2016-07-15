@@ -49,7 +49,18 @@ class LinkedList(AbstractLinkedList):
         raise StopIteration
         
     def __getitem__(self, index):
-        pass
+        if index is None:
+            raise KeyError
+        if not isinstance(index, int):
+            raise TypeError()
+        if index >= len(self):
+            raise IndexError()
+            
+        counter = 0
+        for node in self:
+            if counter == index:
+                return node.elem
+            counter += 1
 
     def __add__(self, other):
         
@@ -137,8 +148,6 @@ class LinkedList(AbstractLinkedList):
             linkedListLengthGreaterThanOne = len(self) != 1
             importantValue = self.start.elem
             
-    
-            
             if (linkedListLengthGreaterThanOne):   
                 nodeAhead = self.start.next
                 self.start = nodeAhead
@@ -147,10 +156,7 @@ class LinkedList(AbstractLinkedList):
                 self.end = None
         
             return importantValue
-        
-        
-        
-
+    
         #poppping from the middl
         counter = 0
         for node in self:
