@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from linked_list import Node, LinkedList
-
+# from linked_list import node, implementation
+from linked_list.node import Node
+from linked_list.implementation import LinkedList
 
 class LinkedListTestCase(unittest.TestCase):
 
     def test_creation_and_equal(self):
         l1 = LinkedList([1, 2, 3])
-
+ 
         self.assertTrue(l1.start is not None)
         self.assertEqual(l1.start.elem, 1)
 
