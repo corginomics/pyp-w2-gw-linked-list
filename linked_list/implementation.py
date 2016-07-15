@@ -13,8 +13,6 @@ class LinkedList(AbstractLinkedList):
         if elements:
             for elem in elements:
                 self.append(elem)
-        # my_list = LinkedList("A", "2", 2, "Q")
-
 
     def __str__(self):
         '''
@@ -26,8 +24,6 @@ class LinkedList(AbstractLinkedList):
         '''
         Returns the length of the container. Part of the protocol for both immutable and mutable containers.
         '''
-        #return elements.__len__()
-        #length = self.end.index()
         counter = 0
         for node in self:
             counter += 1
@@ -48,8 +44,6 @@ class LinkedList(AbstractLinkedList):
             node = node.next
         raise StopIteration
         
-        
-
     def __getitem__(self, index):
         pass
 
@@ -60,53 +54,25 @@ class LinkedList(AbstractLinkedList):
         pass
 
     def __eq__(self, other):
+        selfNode = self.start
+        otherNode = other.start
         
-        #compare self.start to other.start
-        # lengthsAreNotEqual = self.count() != other.count()
-        # if (lengthsAreNotEqual):
-        #     return False
-        
-        # for selfNode,otherNode in zip(self, other):
-        #     if selfNode.elem != otherNode.elem:
-        #         return False
-        # return True
-        
-       
-        
-        # selfNode = self.start
-        # otherNode = other.start
-        
-    
-        # while (selfNode and otherNode):
-        
-        #     if selfNode.elem != otherNode.elem:
-        #         return False
-                    
-        #     selfNode = selfNode.next
-        #     otherNode = otherNode.next
-            
-        # return True
-        
-        listOfSelfElem = [node.elem for node in self]
-        listOfOtherElem = [node.elem for node in other]
-        return listOfOtherElem == listOfOtherElem
-        
-        
-            
-        
-        
- 
+        while (selfNode != self.end and otherNode != other.end):
+            if selfNode.elem != otherNode.elem:
+                return False
+            selfNode = selfNode.next
+            otherNode = otherNode.next
+        return True
 
     def append(self, elem):
         temp = Node(elem)
-        
-        # Assuming empty linkedlist
-        if self.start is None:
+        linkedListIsEmpty = self.start is None
+        if linkedListIsEmpty:
             self.start = temp
             self.end = self.start
-        
-        self.end.next = temp
-        self.end = temp
+        else: 
+            self.end.next = temp
+            self.end = temp
         
 
     def count(self):
