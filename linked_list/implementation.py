@@ -66,13 +66,20 @@ class LinkedList(AbstractLinkedList):
         # return True
         
         # compare self.start to other.start
-        if self.start not other.start:
+        lengthsAreNotEqual = self.len() != other.len()
+        if (len(self) not len(other)):
             return False
-        # compare self.end to other.end
-        if self.end not other.end:
-            return False
-        # compare values between self and other
         
+        
+        selfNode = self.start
+        otherNode = other.start
+        
+        while (selfNode not None) and (otherNode not None):
+            selfNode.elem == otherNode.elem #checker
+        
+        selfNode = selfNode.next
+        otherNode = otherNode.next
+        #checker
             
 
     def append(self, elem):
