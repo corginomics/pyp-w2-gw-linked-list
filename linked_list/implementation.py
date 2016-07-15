@@ -85,10 +85,17 @@ class LinkedList(AbstractLinkedList):
 
 
     def pop(self, index=None):
-        #pop_node = self.start
-        # when index == None
         
-        #popping the end
+        # Raise error if linkedlist is empty
+        if len(self) == 0:
+            raise IndexError()
+        
+        # Raise error if index is greater than or equal to index
+        if index is not None:
+            if index >= len(self) or index < 0:
+                raise IndexError()
+        
+        #popping the end, or when index=None
         if index is None or (len(self) - 1 == index):
             for node in self:
                 if node.next == self.end:   # if node is second-to-last-node
@@ -96,19 +103,31 @@ class LinkedList(AbstractLinkedList):
                     self.end = node # change self.end to second to last node
                     self.end.next = None #change self.next to None
                     return endValue
-        if index == 0:
-            importantValue = self.start.elem
-            nodeAhead = self.start.next
-            self.start = nodeAhead
-            return importantValue
-            
-        #if index == self.pop(index):
-        # user inputs 2. index is 2
-        # if 2 ==
-        # my understanding at this point is vague: 
         
+        #pop from beginning, user enters index=0, or when ___________
+        if index == 0 or len(self) == 1:
+            linkedListLengthGreaterThanOne = len(self) != 1
+            importantValue = self.start.elem
+            
+    
+            
+            if (linkedListLengthGreaterThanOne):   
+                nodeAhead = self.start.next
+                self.start = nodeAhead
+            else:
+                self.start = None
+                self.end = None
+        
+            return importantValue
+        
+        
+        
+
+        #poppping from the middl
         counter = 0
         for node in self:
+            # if nextNode == None:
+            #     break
             previousNode = node
             node = node.next
             nextNode = node.next
@@ -119,33 +138,4 @@ class LinkedList(AbstractLinkedList):
                 previousNode.next = nextNode
                 return importantValue
             
-            
-            
         
-        #if we're po    
-        
-        #############dev below
-        # trying to build the pop thingey
-        #else:
-        # for node in self:
-        #     if index == self.start:
-        #         userValue = self.start.elem
-        #     return userValue
-                
-        
-        
-        # user does input an index
-        # else:
-        #     counter = 0
-        #     for node in self:
-        #         previousNode = node
-        #         node = node.next 
-        #         nextNode = node.next
-                
-        #         if counter == index:
-        #             #connect the 2 nodes here
-        #             previousNode.next = nextNode
-        #             return node.elem
-                    
-        #         counter += 1
-
