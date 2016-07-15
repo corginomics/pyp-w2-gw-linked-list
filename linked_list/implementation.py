@@ -112,13 +112,14 @@ class LinkedList(AbstractLinkedList):
             previousNode = node
             node = node.next
             nextNode = node.next
+            counter += 1
             
-            if (counter == index - 1):
+            if (counter == index):
                 importantValue = node.elem
                 previousNode.next = nextNode
                 return importantValue
             
-            counter += 1
+            
             
         
         #if we're po    
