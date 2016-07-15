@@ -1,6 +1,8 @@
 from .interface import AbstractLinkedList
 from .node import Node
 
+
+
 class LinkedList(AbstractLinkedList):
     """
     Implementation of an AbstractLinkedList inteface.
@@ -18,8 +20,10 @@ class LinkedList(AbstractLinkedList):
         '''
         Defines behavior for when str() is called on an instance of your class.
         '''
-        pass
-
+        output = [node.elem for node in self]
+        return str(output)
+        
+    
     def __len__(self):
         '''
         Returns the length of the container. Part of the protocol for both immutable and mutable containers.
@@ -48,12 +52,32 @@ class LinkedList(AbstractLinkedList):
         pass
 
     def __add__(self, other):
-        pass
+        
+        newList = self.__class__()
+        
+        for node in self:
+            newList.append(node.elem)
+        for node in other:
+            newList.append(node.elem)
+        return newList
 
     def __iadd__(self, other):
-        pass
+        for node in other:
+            self.append(node.elem)
+        return self
+            
+        # failing on self is None and other has 2 nodes
 
     def __eq__(self, other):
+        # do we need to take 
+        # Test for self and other being empty
+        if self is None and other is None:
+            return True
+            
+        # Test for one or the other is empty, but not both (XOR)
+        if (self is None and other is not None) or (self is not None and other is None):
+            return False
+            
         selfNode = self.start
         otherNode = other.start
         
@@ -63,6 +87,10 @@ class LinkedList(AbstractLinkedList):
             selfNode = selfNode.next
             otherNode = otherNode.next
         return True
+    
+    def __ne__(self, other):
+        if self is not other:
+            return True
 
     def append(self, elem):
         temp = Node(elem)
