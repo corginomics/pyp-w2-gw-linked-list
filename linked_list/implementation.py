@@ -53,7 +53,7 @@ class LinkedList(AbstractLinkedList):
             raise KeyError
         if not isinstance(index, int):
             raise TypeError()
-        if index >= len(self):
+        if index >= len(self) or index < 0:
             raise IndexError()
             
         counter = 0
@@ -61,6 +61,7 @@ class LinkedList(AbstractLinkedList):
             if counter == index:
                 return node.elem
             counter += 1
+            
 
     def __add__(self, other):
         
@@ -77,10 +78,7 @@ class LinkedList(AbstractLinkedList):
             self.append(node.elem)
         return self
             
-        # failing on self is None and other has 2 nodes
-
     def __eq__(self, other):
-        # do we need to take 
         # Test for self and other being empty
         if self is None and other is None:
             return True
@@ -113,63 +111,35 @@ class LinkedList(AbstractLinkedList):
             self.end.next = temp
             self.end = temp
         
-
     def count(self):
-        # if self is None:
-        #     return 0
-        # return len(self)
-        # for self.start in temp 
         return len(self)
     
-
-
     def pop(self, index=None):
-        
-        # Raise error if linkedlist is empty
         if len(self) == 0:
-            raise IndexError()
+            raise IndexError
         
-        # Raise error if index is greater than or equal to index
-        if index is not None:
-            if index >= len(self) or index < 0:
-                raise IndexError()
-        
-        #popping the end, or when index=None
-        if index is None or (len(self) - 1 == index):
-            for node in self:
-                if node.next == self.end:   # if node is second-to-last-node
-                    endValue = self.end.elem  # set endValue to last node's elem
-                    self.end = node # change self.end to second to last node
-                    self.end.next = None #change self.next to None
-                    return endValue
-        
-        #pop from beginning, user enters index=0, or when ___________
-        if index == 0 or len(self) == 1:
-            linkedListLengthGreaterThanOne = len(self) != 1
-            importantValue = self.start.elem
+        if index is None:
+            index = self.count() - 1
             
-            if (linkedListLengthGreaterThanOne):   
-                nodeAhead = self.start.next
-                self.start = nodeAhead
-            else:
-                self.start = None
-                self.end = None
+        if index < 0 or index >= len(self):
+            raise IndexError
         
-            return importantValue
-    
-        #poppping from the middl
-        counter = 0
-        for node in self:
-            # if nextNode == None:
-            #     break
-            previousNode = node
-            node = node.next
-            nextNode = node.next
-            counter += 1
-            
-            if (counter == index):
-                importantValue = node.elem
-                previousNode.next = nextNode
-                return importantValue
-            
+        if index == 0:
+            elem = self.start.elem
+            self.start = self.start.next
+            return elem
         
+        i = 0
+        
+        previousNode = None
+        currentNode = self.start
+        
+        while True:
+            if i == index:
+                previousNode.next = currentNode.next
+                return currentNode.elem
+                
+            previousNode = currentNode
+            currentNode = currentNode.next
+            
+            i += 1
